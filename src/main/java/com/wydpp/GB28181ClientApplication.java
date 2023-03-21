@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.wydpp"})
 public class GB28181ClientApplication {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GB28181ClientApplication.class);

@@ -1,5 +1,7 @@
 package com.wydpp.gb28181.processor.request.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.wydpp.gb28181.bean.SendRtpItem;
 import com.wydpp.gb28181.bean.SipDevice;
 import com.wydpp.gb28181.bean.SipPlatform;
@@ -30,7 +32,7 @@ import javax.sip.header.CallIdHeader;
 import javax.sip.header.FromHeader;
 import javax.sip.message.Request;
 import javax.sip.message.Response;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Vector;
@@ -75,12 +77,28 @@ public class InviteRequestProcessor extends SIPRequestProcessorParent implements
 
     private static String RECORD_VIDEO_FILE;
 
+    private static JSONObject mp4map;
+
     static {
         try {
             //VIDEO_FILE = ResourceUtils.getFile("classpath:device/videofile.h264").getAbsolutePath();
-            VIDEO_FILE = ResourceUtils.getFile("/opt/gb28181/citytz.mp4").getAbsolutePath();
-            RECORD_VIDEO_FILE = ResourceUtils.getFile("classpath:device/record.h264").getAbsolutePath();
+            VIDEO_FILE = ResourceUtils.getFile("/opt/gb28181/video/citytz.mp4").getAbsolutePath();
+
+            RECORD_VIDEO_FILE = ResourceUtils.getFile("/opt/gb28181/video/citytz.mp4").getAbsolutePath();
+
+            File file =new File(System.getProperty("user.dir")+File.separator+"device/mp4map.json");
+            String path = "device/mp4map.json";
+            InputStream config = new FileInputStream(System.getProperty("user.dir")+File.separator+"device/mp4map.json");
+            if (config == null) {
+                throw new RuntimeException("读取文件失败");
+            } else {
+                mp4map = JSON.parseObject(config, JSONObject.class);
+                System.out.println(mp4map);
+            }
+
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch(IOException e){
             e.printStackTrace();
         }
     }
@@ -167,7 +185,15 @@ public class InviteRequestProcessor extends SIPRequestProcessorParent implements
             sipSubscribe.addOkSubscribe(callIdHeader.getCallId(), eventResult -> {
                 logger.info("开始推流");
                 //ffmpegCommander.closeAllStream();
-                ffmpegCommander.pushStream(eventResult.callId, filePath.get(), sendRtpItem.getIp(), sendRtpItem.getPort());
+                String path=null;
+                if(mp4map.containsKey(channelId)){
+                    path=mp4map.getString(channelId);
+                }else if (mp4map.containsKey("default")){
+                    path=mp4map.getString("default");
+                }else{
+                    path=filePath.get();
+                }
+                ffmpegCommander.pushStream(eventResult.callId, path, sendRtpItem.getIp(), sendRtpItem.getPort());
             });
             StringBuffer content = new StringBuffer(200);
             content.append("v=0\r\n");

@@ -32,4 +32,4 @@ ffmpeg:
     #ffmpeg执行文件路径
     path: /Users/jinhuazhu/app/ffmpeg
     #模拟推送视频流的命令
-    pushStreamCmd: -re -i {filePath} -vcodec h264 -acodec aac -f rtp_mpegts rtp://{ip}:{port}
+    pushStreamCmd: -re -i {filePath} -c:v copy -c:a copy -f rtp_mpegts rtp://{ip}:{port}
