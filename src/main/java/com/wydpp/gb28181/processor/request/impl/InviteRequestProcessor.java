@@ -77,7 +77,8 @@ public class InviteRequestProcessor extends SIPRequestProcessorParent implements
 
     static {
         try {
-            VIDEO_FILE = ResourceUtils.getFile("classpath:device/videofile.h264").getAbsolutePath();
+            //VIDEO_FILE = ResourceUtils.getFile("classpath:device/videofile.h264").getAbsolutePath();
+            VIDEO_FILE = ResourceUtils.getFile("/opt/gb28181/citytz.mp4").getAbsolutePath();
             RECORD_VIDEO_FILE = ResourceUtils.getFile("classpath:device/record.h264").getAbsolutePath();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -131,6 +132,7 @@ public class InviteRequestProcessor extends SIPRequestProcessorParent implements
                 Vector mediaFormats = media.getMediaFormats(false);
                 if (mediaFormats.contains("98")) {
                     port = media.getMediaPort();
+                    ssrc="0000000000";
                     break;
                 }
             }
@@ -164,7 +166,7 @@ public class InviteRequestProcessor extends SIPRequestProcessorParent implements
             CallIdHeader callIdHeader = (CallIdHeader) request.getHeader(CallIdHeader.NAME);
             sipSubscribe.addOkSubscribe(callIdHeader.getCallId(), eventResult -> {
                 logger.info("开始推流");
-                ffmpegCommander.closeAllStream();
+                //ffmpegCommander.closeAllStream();
                 ffmpegCommander.pushStream(eventResult.callId, filePath.get(), sendRtpItem.getIp(), sendRtpItem.getPort());
             });
             StringBuffer content = new StringBuffer(200);

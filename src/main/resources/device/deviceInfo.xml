@@ -2,11 +2,11 @@
 <Response>
     <CmdType>DeviceInfo</CmdType>
     <SN>${SN}</SN>
-    <DeviceName>gb28181-client</DeviceName>
+    <DeviceName>繁星POC设备</DeviceName>
     <DeviceID>${DEVICE_ID}</DeviceID>
     <Result>OK</Result>
     <!-- 设备生产商 -->
-    <Manufacturer>海康威视</Manufacturer>
+    <Manufacturer>中国系统</Manufacturer>
     <!-- 设备型号(可选)-->
     <Model>TC-2808AN-HD</Model>
     <!-- 设备固件版本(可选)-->

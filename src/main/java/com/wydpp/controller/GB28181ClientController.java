@@ -11,12 +11,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.DeferredResult;
 
+import javax.annotation.PostConstruct;
+
 @RestController
 @RequestMapping("/gb28181")
 public class GB28181ClientController {
 
     private final Logger logger = LoggerFactory.getLogger(GB28181ClientController.class);
 
+    @PostConstruct
+    public void init(){
+        register();
+    }
     @Autowired
     private SIPCommander sipCommander;
 
@@ -29,7 +35,7 @@ public class GB28181ClientController {
     @Autowired
     private IFfmpegCommander ffmpegCommander;
 
-    @PutMapping(path = "/register")
+    @RequestMapping (path = "/register")
     public DeferredResult<String> register() {
         DeferredResult<String> result = new DeferredResult<>(1000 * 5L);
         result.onTimeout(() -> {
@@ -49,7 +55,7 @@ public class GB28181ClientController {
         return result;
     }
 
-    @PutMapping(path = "/unRegister")
+    @RequestMapping(path = "/unRegister")
     public DeferredResult<String> unRegister() {
         DeferredResult<String> result = new DeferredResult<>(1000 * 5L);
         result.onTimeout(() -> {
