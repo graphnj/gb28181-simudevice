@@ -1,11 +1,15 @@
 {
   "default": "/opt/gb28181/video/street.mp4",
   "32010200492000010011":"/opt/gb28181/video/street.mp4",
-  "32010200492000010012":"/opt/gb28181/video/citytz.mp4",
-  "32010200492000010013":"/opt/gb28181/video/street.mp4",
-  "32010200492000010014":"/opt/gb28181/video/citytz.mp4",
-  "32010200492000010015":"/opt/gb28181/video/street.mp4",
-  "32010200492000010016":"/opt/gb28181/video/citytz.mp4",
-  "32010200492000010017":"/opt/gb28181/video/street.mp4",
-  "32010200492000010018":"/opt/gb28181/video/citytz.mp4"
+  "32010200492000010012":"/opt/gb28181/video/jinhua-nj-1.mp4",
+  "32010200492000010013":"/opt/gb28181/video/jinhua-nj-2.mp4",
+  "32010200492000010014":"/opt/gb28181/video/jinhua-nj-3.mp4",
+  "32010200492000010015":"/opt/gb28181/video/jinhua-nj-4.mp4",
+  "32010200492000010016":"/opt/gb28181/video/jinhua-nj-5.mp4",
+  "32010200492000010017":"/opt/gb28181/video/jinhua-nj-6.mp4",
+  "32010200492000010018":"/opt/gb28181/video/dahua-3gongdi.mp4",
+  "32010200492000010019":"/opt/gb28181/video/dahua-2chengguan.mp4",
+  "32010200492000010020":"/opt/gb28181/video/dahua-4yuanqu.mp4",
+  "32010200492000010021":"/opt/gb28181/video/jinhua-nj-7.mp4",
+  "32010200492000010022":"/opt/gb28181/video/jinhua-nj-8.mp4"
 }

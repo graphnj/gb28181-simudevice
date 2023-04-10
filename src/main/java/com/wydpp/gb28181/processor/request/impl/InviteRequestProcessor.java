@@ -125,6 +125,11 @@ public class InviteRequestProcessor extends SIPRequestProcessorParent implements
                 responseAck(evt, Response.BAD_REQUEST); // 参数不全， 发400，请求错误
                 return;
             }
+            if (!mp4map.containsKey(channelId)){
+                logger.info("Errorbyzhu 请求ChannelID 当前未配置："+channelId);
+                responseAck(evt, Response.NOT_FOUND); // 参数不全， 发400，请求错误
+                return;
+            }
             logger.info("收到平台" + requesterId + "的实时视频Invite请求");
             //responseAck(evt, Response.TRYING);
             String contentString = new String(request.getRawContent());
